@@ -33,6 +33,14 @@
     --ring: 224 71.4% 4.1%;
 
     --radius: 0.5rem;
+
+    /* màu tự thêm */
+
+    /* sidebar */
+    --sidebar-primary: 209 97.2% 14.1%;
+    --sidebar-hover: 134, 61%, 41%;
+    --sidebar-border: 0, 0%, 93%; /* border-b of sidebar_item */
+    --sidebar-active: 215, 86%, 47%;
   }
 
   .dark {

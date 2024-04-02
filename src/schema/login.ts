@@ -6,3 +6,13 @@ export const loginSchema = z.object({
 })
 
 export type LoginSchema = z.infer<typeof loginSchema>
+export type UserResponse = {
+  user: {
+    id: string
+    name: string
+    email: string
+  }
+  token: string
+  roles: string[]
+  expired_time: string
+}

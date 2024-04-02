@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function Login() {
   return (
     <div className="flex items-center justify-center h-screen">
-      <Card className="w-1/5">
+      <Card className="w-1/5 shadow-box">
         <CardHeader>
           <CardTitle>Xin chào</CardTitle>
           <CardDescription>Đăng nhập để tiếp tục</CardDescription>

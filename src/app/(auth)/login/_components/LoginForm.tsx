@@ -11,11 +11,13 @@ import { Input } from '@/components/ui/input'
 import { HttpError } from '@/config/http'
 import authRequestApi from '@/http-request/actions/auth'
 import { LoginSchema, loginSchema } from '@/schema/login'
+import { useAuthContext } from '@/context/AuthProvider'
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const { setUser } = useAuthContext()
 
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -31,8 +33,9 @@ export default function LoginForm() {
 
     try {
       const res = await authRequestApi.login(data)
-      await authRequestApi.setSessionToken(res.token)
+      await authRequestApi.setSessionToken({ token: res.token, expired_time: res.expired_time })
       router.push('/')
+      router.refresh()
 
       const user = {
         ...res.user,
@@ -41,6 +44,7 @@ export default function LoginForm() {
 
       // Set thông tin user vào local để lấy
       localStorage.setItem('user', JSON.stringify(user))
+      setUser(user)
     } catch (error) {
       if (error instanceof HttpError) {
         setError(error.payload.message)

@@ -17,7 +17,7 @@ export default function Header({ children }: { children?: React.ReactNode }) {
   }, [])
 
   return (
-    <div className="h-14 leading-[56px] border-b flex items-center justify-between px-4">
+    <div className="h-14 leading-[56px] border-b flex items-center justify-between px-4 shadow-md">
       <div>{children}</div>
       <div className="flex gap-2">
         <div className="flex items-center gap-1">

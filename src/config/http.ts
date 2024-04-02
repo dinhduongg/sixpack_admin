@@ -1,6 +1,7 @@
 import getSessionToken from '@/http-request/actions/getSessionToken'
 import envConfig from '@/lib/env-config'
 import { normalizePath } from '@/lib/utils'
+import { redirect } from 'next/navigation'
 
 type CustomOptions = RequestInit & {
   baseUrl?: string | undefined
@@ -8,6 +9,7 @@ type CustomOptions = RequestInit & {
 }
 
 const ENTITY_ERROR_STATUS = 422
+const AUTHENTICATION_ERROR_STATUS = 401
 
 type EntityErrorPayload = {
   message: string
@@ -49,7 +51,7 @@ class SessionToken {
 
 export const clientSessionToken = new SessionToken()
 
-const request = async <Response>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', endPoint: string, options?: CustomOptions | undefined) => {
+const request = async <Response>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', endPoint: string, options?: CustomOptions | undefined): Promise<Response> => {
   let body
 
   if (options?.body instanceof FormData) {
@@ -95,6 +97,21 @@ const request = async <Response>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', endP
           payload: EntityErrorPayload
         },
       )
+    } else if (res.status === AUTHENTICATION_ERROR_STATUS) {
+      if (typeof window !== 'undefined') {
+        await fetch('/api/auth/logout', {
+          method: 'POST',
+          body: JSON.stringify({ force: true }),
+          headers: {
+            ...baseHeaders,
+          },
+        })
+        clientSessionToken.value = ''
+        location.href = '/login'
+      } else {
+        const sessionToken = (options?.headers as any)?.Authorization.split('Bearer ')[1]
+        redirect(`/logout?sessionToken=${sessionToken}`)
+      }
     } else {
       throw new HttpError(data)
     }

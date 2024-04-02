@@ -47,6 +47,13 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        // màu tự thêm
+        sidebar: {
+          primary: 'hsl(var(--sidebar-primary))',
+          hover: 'hsl(var(--sidebar-hover))',
+          border: 'hsl(var(--sidebar-border))',
+          active: 'hsl(var(--sidebar-active))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

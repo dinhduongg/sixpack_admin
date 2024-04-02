@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers'
 
 import authRequestApi from '@/http-request/actions/auth'
-import handleApiError from '@/lib/handle-api-error'
 import { HttpError } from '@/config/http'
 
 export async function POST(request: Request) {
@@ -42,7 +41,6 @@ export async function POST(request: Request) {
         },
       )
     } catch (error) {
-      console.log(error)
       if (error instanceof HttpError) {
         return Response.json(error, {
           status: error.status,
