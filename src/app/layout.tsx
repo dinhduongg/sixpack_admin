@@ -28,7 +28,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <AuthProvider initialToken={sessionToken ?? ''}>
           <div className="flex">
             {sessionToken && <Sidebar dashboards={dashboards.dashboards} />}
-            <div className="flex-1">{children}</div>
+            <div className="flex-1 px-6">{children}</div>
           </div>
           <ToastProvider />
         </AuthProvider>

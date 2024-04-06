@@ -8,6 +8,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useAuthContext } from '@/context/AuthProvider'
 import { cn, generateRandomId } from '@/lib/utils'
 import { Dashboard } from '@/schema/dashboards'
+import { loadFromStorage } from '@/hooks/useLocalStorage'
 
 interface SidebarItemProsp {
   dashboard: Dashboard
@@ -17,7 +18,7 @@ export default function SidebarItem({ dashboard }: SidebarItemProsp) {
   const [mounted, setMounted] = useState(true)
   const [expanded, setExpanded] = useState(true)
 
-  const isOpen = JSON.parse(localStorage.getItem('isOpen') ?? 'true')
+  const isOpen = loadFromStorage('isOpen')
 
   const ref = useRef<HTMLUListElement>(null)
   const pathname = usePathname()
@@ -44,6 +45,22 @@ export default function SidebarItem({ dashboard }: SidebarItemProsp) {
       window.removeEventListener('resize', updateMaxHeight)
     }
   }, [expanded])
+
+  useEffect(() => {
+    const index = dashboard.childrens.findIndex((child) => `/${child?.url?.split('?')[0]}` === pathname)
+
+    if (index !== -1) {
+      ref.current?.children[index]?.scrollIntoView({ behavior: 'instant', block: 'center' })
+    }
+  }, [pathname, dashboard.childrens])
+
+  useEffect(() => {
+    const index = dashboard.childrens.findIndex((child) => `/${child?.url?.split('?')[0]}` === pathname)
+
+    if (index !== -1) {
+      ref.current?.children[index]?.scrollIntoView({ behavior: 'instant', block: 'center' })
+    }
+  }, [])
 
   useEffect(() => {
     setMounted(false)

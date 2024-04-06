@@ -54,6 +54,8 @@ const config = {
           border: 'hsl(var(--sidebar-border))',
           active: 'hsl(var(--sidebar-active))',
         },
+        bordercolor: '#ddd',
+        'link-text': '#16d',
       },
       borderRadius: {
         lg: 'var(--radius)',

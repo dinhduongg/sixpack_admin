@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 
 import authRequestApi from '@/http-request/actions/auth'
 import handleApiError from '@/lib/handle-api-error'
+import { removeFromStorage } from './useLocalStorage'
 
 export default function useLogout(force: boolean = false) {
   const router = useRouter()
@@ -11,7 +12,7 @@ export default function useLogout(force: boolean = false) {
   const logout = async () => {
     try {
       await authRequestApi.logoutFromNextClientToNextServer(force)
-      localStorage.removeItem('user')
+      removeFromStorage('user')
       router.refresh()
     } catch (error) {
       handleApiError({ error })

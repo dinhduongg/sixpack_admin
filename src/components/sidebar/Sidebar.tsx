@@ -2,24 +2,33 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { cn, generateRandomId } from '@/lib/utils'
 import { Dashboard } from '@/schema/dashboards'
 import SidebarItem from './SidebarItem'
+import { loadFromStorage, saveToStorage } from '@/hooks/useLocalStorage'
 
 interface SidebarProps {
   dashboards: Dashboard[]
 }
 
 export default function Sidebar({ dashboards }: SidebarProps) {
-  const large = JSON.parse(localStorage.getItem('isOpen') ?? 'true')
+  const [isMounted, setIsMounted] = useState(false)
+
+  const large = loadFromStorage('isOpen')
   const [isLarge, setIsLarge] = useState(large)
 
   const handleIsLarge = (value: boolean) => {
     setIsLarge(value)
-    localStorage.setItem('isOpen', JSON.stringify(value))
+    saveToStorage(value, 'isOpen')
   }
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) return null
 
   return (
     <div
@@ -38,7 +47,7 @@ export default function Sidebar({ dashboards }: SidebarProps) {
           <>
             <div className="flex items-center gap-2">
               <Image src="/logo.jpg" width={50} height={50} alt="logo" />
-              <span className="text-xl text-white font-bold">Sixpack</span>
+              <p className="text-xl text-white font-bold">Sixpack</p>
             </div>
             <div
               className="cursor-pointer text-black bg-white rounded-full flex items-center justify-center hover:bg-orange-400 hover:text-white duration-100"

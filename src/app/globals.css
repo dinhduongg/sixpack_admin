@@ -78,7 +78,28 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.c-table {
+  @apply w-full border border-bordercolor text-[14px];
+}
+
+.c-table thead {
+  @apply w-full bg-[#dffce8];
+}
+
+.c-table thead th {
+  @apply border-r border-bordercolor last:border-none py-1;
+}
+
+.c-table tbody td {
+  @apply border-r border-t border-bordercolor last:border-r-0 p-1;
+}
+
+.c-table tbody tr {
+  @apply odd:bg-[#f5f5f5];
 }

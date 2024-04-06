@@ -12,6 +12,7 @@ import { HttpError } from '@/config/http'
 import authRequestApi from '@/http-request/actions/auth'
 import { LoginSchema, loginSchema } from '@/schema/login'
 import { useAuthContext } from '@/context/AuthProvider'
+import { saveToStorage } from '@/hooks/useLocalStorage'
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false)
@@ -43,7 +44,7 @@ export default function LoginForm() {
       }
 
       // Set thông tin user vào local để lấy
-      localStorage.setItem('user', JSON.stringify(user))
+      saveToStorage(user, 'user')
       setUser(user)
     } catch (error) {
       if (error instanceof HttpError) {

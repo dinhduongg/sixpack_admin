@@ -3,6 +3,7 @@
 import { createContext, useContext, useState } from 'react'
 
 import { clientSessionToken } from '@/config/http'
+import { loadFromStorage } from '@/hooks/useLocalStorage'
 
 interface User {
   id: string
@@ -31,11 +32,7 @@ export default function AuthProvider({ children, initialToken }: { children: Rea
     }
   })
 
-  let item
-
-  if (typeof window !== 'undefined') {
-    item = JSON.parse(localStorage.getItem('user') || '{}')
-  }
+  const item = loadFromStorage('user')
   const [user, setUser] = useState(item)
 
   return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>
