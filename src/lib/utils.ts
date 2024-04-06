@@ -20,3 +20,12 @@ export const generateRandomId = (length: number) => {
 
   return id
 }
+
+export const dateFormat = (data: string) => {
+  const date = new Date(data)
+
+  const formattedDate = date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
+  const formattedTime = date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23', timeZone: 'Asia/Ho_Chi_Minh' })
+
+  return { formattedDate, formattedTime }
+}

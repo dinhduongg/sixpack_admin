@@ -1,8 +1,10 @@
 import { Inter } from 'next/font/google'
 import { cookies } from 'next/headers'
-
 import type { Metadata } from 'next'
+
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css'
+
 import AuthProvider from '@/context/AuthProvider'
 import ToastProvider from '@/context/ToastProvider'
 import Sidebar from '@/components/sidebar/Sidebar'
