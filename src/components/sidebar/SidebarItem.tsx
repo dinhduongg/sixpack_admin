@@ -14,7 +14,6 @@ interface SidebarItemProsp {
 }
 
 export default function SidebarItem({ dashboard }: SidebarItemProsp) {
-  const [mounted, setMounted] = useState(true)
   const [expanded, setExpanded] = useState(true)
 
   const isOpen = JSON.parse(localStorage.getItem('isOpen') ?? 'true')
@@ -46,10 +45,12 @@ export default function SidebarItem({ dashboard }: SidebarItemProsp) {
   }, [expanded])
 
   useEffect(() => {
-    setMounted(false)
-  }, [])
+    const index = dashboard.childrens.findIndex((child) => `/${child?.url?.split('?')[0]}` === pathname)
 
-  if (mounted) return null
+    if (index !== -1) {
+      ref.current?.children[index]?.scrollIntoView({ behavior: 'instant', block: 'center' })
+    }
+  }, [pathname, dashboard.childrens])
 
   return (
     <div>
