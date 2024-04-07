@@ -1,9 +1,8 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 import { Search } from 'lucide-react'
-import { Input } from '../ui/input'
 
 interface SearchInputProps {
   placeholder?: string
@@ -15,11 +14,12 @@ export default function SearchInput({ placeholder, query = 'q' }: SearchInputPro
 
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const params = new URLSearchParams()
+    const params = new URLSearchParams(searchParams)
 
     params.set(query, searchValue)
     router.push(`${pathname}?${params.toString()}`)

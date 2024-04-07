@@ -1,11 +1,26 @@
 import * as z from 'zod'
 
 export const dashboardDto = z.object({
-  name: z.string({ required_error: 'Không được để trống' }),
-  parent_id: z.string().optional(),
-  url: z.string().optional(),
-  icon: z.string().optional(),
-  sorted: z.number().optional().default(1),
+  name: z.string().nonempty({ message: 'Không được để trống' }),
+  parent_id: z
+    .string()
+    .optional()
+    .transform((val) => (val === 'undefined' ? undefined : val)),
+  url: z
+    .string()
+    .optional()
+    .transform((val) => (val === '' ? undefined : val)),
+  icon: z
+    .string()
+    .optional()
+    .transform((val) => (val === '' ? undefined : val)),
+  role_code: z
+    .string()
+    .optional()
+    .transform((val) => (val === '' ? undefined : val)),
+  check_role: z.boolean().optional(),
+  enabled: z.boolean().optional(),
+  sorted: z.coerce.number().default(1),
 })
 
 export type Dashboard = {

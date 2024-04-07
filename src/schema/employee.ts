@@ -23,6 +23,7 @@ export type Employee = {
   logined: boolean
   locked_at: string | null
   created_at: string
+  roles: string[]
 }
 
 export type EmployeeUpdateDto = z.infer<typeof employeeUpdateDto>

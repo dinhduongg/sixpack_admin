@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import {
@@ -26,6 +27,8 @@ type DeleteButtonProps = {
 }
 
 export default function DeleteButton({ roles = [], title, description, onConfirm }: DeleteButtonProps) {
+  const [mounted, setMounted] = useState(false)
+
   const { user } = useAuthContext()
   const router = useRouter()
 
@@ -38,6 +41,12 @@ export default function DeleteButton({ roles = [], title, description, onConfirm
       handleApiError(error)
     }
   }
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
 
   return (
     <AlertDialog>

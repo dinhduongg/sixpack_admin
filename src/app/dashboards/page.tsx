@@ -1,19 +1,9 @@
-import Link from 'next/link'
-import { Metadata } from 'next'
-
-import Header from '@/components/common/Header'
-import dashboardApiRequest from '@/http-request/fetch/dashboards'
-import SearchInput from '@/components/common/SearchInput'
-import { Button } from '@/components/ui/button'
 import BreadCrumb from '@/components/common/BreadCrumb'
+import dashboardApiRequest from '@/http-request/fetch/dashboards'
+import TableItem from './_components/TableItem'
 
 interface DashboardsProps {
   searchParams: Query
-}
-
-export const metadata: Metadata = {
-  title: 'Dashboard',
-  description: 'Danh sách dashboard',
 }
 
 export default async function Dashboards({ searchParams }: DashboardsProps) {
@@ -48,23 +38,7 @@ export default async function Dashboards({ searchParams }: DashboardsProps) {
         </thead>
         <tbody>
           {dashboards.dashboards.map((item, index) => (
-            <tr key={item.id}>
-              <td className="w-[5%]">{index + 1}</td>
-              <td>
-                <Link className="text-link-text hover:underline" href={`/dashboards?parent_id=${item.id}`}>
-                  {item.name}
-                </Link>
-              </td>
-              <td>{item.sorted}</td>
-              <td className="w-[10%]">
-                <div className="flex justify-center gap-1">
-                  <Button variant="default">
-                    <Link href={`/dashboards/${item.id}/edit`}>Sửa</Link>
-                  </Button>
-                  <Button variant="destructive">Xóa</Button>
-                </div>
-              </td>
-            </tr>
+            <TableItem key={item.id} dashboard={item} index={index} />
           ))}
         </tbody>
       </table>

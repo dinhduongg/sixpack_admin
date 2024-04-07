@@ -10,34 +10,41 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
 import dashboardApiRequest from '@/http-request/fetch/dashboards'
 import handleApiError from '@/lib/handle-api-error'
 import { Dashboard, DashboardDto, dashboardDto } from '@/schema/dashboards'
+import { Role } from '@/schema/roles'
 
-type CreateFormProps = {
+type EditFormProps = {
+  dashboard: Dashboard
   dashboards: Dashboard[]
+  roles: Role[]
 }
 
-export default function CreateForm({ dashboards }: CreateFormProps) {
+export default function EditForm({ dashboard, dashboards, roles }: EditFormProps) {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const form = useForm<DashboardDto>({
     resolver: zodResolver(dashboardDto),
     defaultValues: {
-      name: '',
-      icon: '',
-      parent_id: 'undefined',
-      url: '',
-      sorted: 1,
+      name: dashboard.name,
+      icon: dashboard.icon ?? '',
+      parent_id: dashboard.parent_id ?? 'undefined',
+      url: dashboard.url ?? '',
+      check_role: dashboard.check_role,
+      enabled: dashboard.enabled,
+      role_code: dashboard.role_code ?? '',
+      sorted: dashboard.sorted ?? 1,
     },
   })
 
   const onSubmit = async (data: DashboardDto) => {
     try {
       setLoading(true)
-      const res = await dashboardApiRequest.create(data)
-      toast.success(res.message)
+      const res = await dashboardApiRequest.update(dashboard.id, data)
+      toast.success(res.mesage)
       router.push('/dashboards')
     } catch (error) {
       handleApiError(error, form.setError)
@@ -91,6 +98,30 @@ export default function CreateForm({ dashboards }: CreateFormProps) {
           />
           <FormField
             control={form.control}
+            name="role_code"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Quyền</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Không" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value={'undefined'}>Không</SelectItem>
+                    {roles.map((item) => (
+                      <SelectItem key={item.id} value={item.role_code}>
+                        {item.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="url"
             render={({ field }) => (
               <FormItem>
@@ -128,8 +159,32 @@ export default function CreateForm({ dashboards }: CreateFormProps) {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="check_role"
+            render={({ field }) => (
+              <FormItem className="flex items-end gap-2">
+                <FormLabel className="text-base">Kiểm tra quyền</FormLabel>
+                <FormControl>
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="enabled"
+            render={({ field }) => (
+              <FormItem className="flex items-end gap-2">
+                <FormLabel className="text-base">Ẩn / hiện</FormLabel>
+                <FormControl>
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
           <Button disabled={loading} type="submit" className="w-full">
-            Thêm mới
+            Chỉnh sửa
           </Button>
         </form>
       </Form>

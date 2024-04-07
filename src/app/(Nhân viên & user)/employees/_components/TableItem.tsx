@@ -48,9 +48,11 @@ export default function TableItem({ data, index }: TableItemProps) {
       <td>{data.email}</td>
       <td>{dateFormat(data.created_at).formattedDate}</td>
       <td>
-        <CircleUserRound size={32} className={data.logined ? 'text-green-500' : 'text-black'} />
+        <div className="flex items-center justify-center">
+          <CircleUserRound size={32} className={data.logined ? 'text-green-500' : 'text-black'} />
+        </div>
       </td>
-      <td>
+      <td className="w-[10%]">
         <div className="flex items-center gap-1">
           <Switch checked={enabled} onCheckedChange={handleDisabled} />
           <Button size="sm">
