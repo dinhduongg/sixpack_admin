@@ -8,6 +8,7 @@ import { cn, generateRandomId } from '@/lib/utils'
 import { Dashboard } from '@/schema/dashboards'
 import SidebarItem from './SidebarItem'
 import { loadFromStorage, saveToStorage } from '@/hooks/useLocalStorage'
+import { useAuthContext } from '@/context/AuthProvider'
 
 interface SidebarProps {
   dashboards: Dashboard[]
@@ -18,6 +19,7 @@ export default function Sidebar({ dashboards }: SidebarProps) {
 
   const large = loadFromStorage('isOpen')
   const [isLarge, setIsLarge] = useState(large)
+  const { user } = useAuthContext()
 
   const handleIsLarge = (value: boolean) => {
     setIsLarge(value)
@@ -66,9 +68,15 @@ export default function Sidebar({ dashboards }: SidebarProps) {
         )}
       </div>
       <div className={cn(isLarge ? 'mt-1' : 'mt-0')}>
-        {dashboards.map((dashboard) => (
-          <SidebarItem key={generateRandomId(12)} dashboard={dashboard} />
-        ))}
+        {dashboards.map((dashboard) => {
+          if (user) {
+            if (user.roles.includes('admin')) {
+              return <SidebarItem key={generateRandomId(12)} dashboard={dashboard} />
+            } else if (dashboard.childrens.some((child) => !child.role_code || user.roles.includes(child.role_code!))) {
+              return <SidebarItem key={generateRandomId(12)} dashboard={dashboard} />
+            }
+          }
+        })}
       </div>
     </div>
   )
