@@ -6,7 +6,7 @@ const dashboardApiRequest = {
   getOne: (id: string) => http.get<{ dashboard: Dashboard }>(`/v1/admin/dashboards/${id}`),
   update: (id: string, body: Partial<DashboardDto>) => http.put<{ mesage: string }>(`/v1/admin/dashboards/${id}`, { dashboard: body }),
   create: (body: Partial<DashboardDto>) => http.post<{ message: string }>('/v1/admin/dashboards', { dashboard: body }),
-  delete: (id: string) => http.delele<{ message: string }>(`/v1/admin/dashboards/${id}`, {}),
+  delete: (id: string) => http.delete<{ message: string }>(`/v1/admin/dashboards/${id}`, {}),
 }
 
 export default dashboardApiRequest

@@ -6,9 +6,9 @@ const employeeApiRequest = {
   getDetail: (id: string) => http.get<{ employee: Employee }>(`/v1/admin/employees/${id}`),
   update: (id: string, body: Partial<EmployeeUpdateDto>) => http.put<{ message: string }>(`/v1/admin/employees/${id}`, { employee: body }),
   changePassword: (id: string, body: ChangePasswordDto) => http.put<{ message: string }>(`/v1/admin/employees/password/${id}`, { employee: body }),
-  delete: (id: string) => http.delele<{ message: string }>(`/v1/admin/employees/${id}`, {}),
+  delete: (id: string) => http.delete<{ message: string }>(`/v1/admin/employees/${id}`, {}),
   createRole: (body: { employee_id: string; role_id: string }) => http.post<{ message: string }>('/v1/admin/employees/role', body),
-  deleteRole: (employee_id: string, role_id: string) => http.delele<{ message: string }>(`/v1/admin/employees/role/${employee_id}/${role_id}`, {}),
+  deleteRole: (employee_id: string, role_id: string) => http.delete<{ message: string }>(`/v1/admin/employees/role/${employee_id}/${role_id}`, {}),
 }
 
 export default employeeApiRequest

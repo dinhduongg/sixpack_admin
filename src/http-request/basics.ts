@@ -7,7 +7,7 @@ const basicApiRequest = {
   getOne: (id: string) => http.get<{ basic: BasicDto }>(`/v1/admin/basics/${id}`),
   create: (body: Partial<BasicDto>) => http.post<{ message: string }>('/v1/admin/basics', { basic: body }),
   update: (id: string, body: Partial<BasicDto>) => http.put<{ message: string }>(`/v1/admin/basics/${id}`, { basic: body }),
-  delete: (id: string) => http.delele<{ message: string }>(`/v1/admin/basics/${id}`, {}),
+  delete: (id: string) => http.delete<{ message: string }>(`/v1/admin/basics/${id}`, {}),
 }
 
 export default basicApiRequest

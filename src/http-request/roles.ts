@@ -6,7 +6,7 @@ const roleApiRequest = {
   getOne: (id: string) => http.get<{ role: Role }>(`/v1/admin/roles/${id}`, { next: { tags: ['roles'] } }),
   update: (id: string, body: Partial<Role>) => http.put<{ message: string }>(`/v1/admin/roles/${id}`, { role: body }),
   create: (body: Partial<Role>) => http.post<{ message: string }>('/v1/admin/roles', { role: body }),
-  delete: (id: string) => http.delele<{ message: string }>(`/v1/admin/roles/${id}`, {}),
+  delete: (id: string) => http.delete<{ message: string }>(`/v1/admin/roles/${id}`, {}),
 }
 
 export default roleApiRequest

@@ -1,7 +1,8 @@
+import { redirect } from 'next/navigation'
+
 import getSessionToken from '@/http-request/getSessionToken'
 import envConfig from '@/lib/env-config'
 import { normalizePath } from '@/lib/utils'
-import { redirect } from 'next/navigation'
 
 type CustomOptions = RequestInit & {
   baseUrl?: string | undefined
@@ -137,7 +138,7 @@ const http = {
   put<Response>(endPoint: string, body: any, options?: Omit<CustomOptions, 'body'> | undefined) {
     return request<Response>('PUT', endPoint, { ...options, body })
   },
-  delele<Response>(endPoint: string, body: any, options?: Omit<CustomOptions, 'body'> | undefined) {
+  delete<Response>(endPoint: string, body: any, options?: Omit<CustomOptions, 'body'> | undefined) {
     return request<Response>('DELETE', endPoint, { ...options, body })
   },
 }
