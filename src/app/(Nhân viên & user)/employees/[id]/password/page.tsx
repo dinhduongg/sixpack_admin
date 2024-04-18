@@ -1,4 +1,4 @@
-import employeeApiRequest from '@/http-request/fetch/employees'
+import employeeApiRequest from '@/http-request/employees'
 import EditForm from './_components/EditForm'
 import BreadCrumb from '@/components/common/BreadCrumb'
 

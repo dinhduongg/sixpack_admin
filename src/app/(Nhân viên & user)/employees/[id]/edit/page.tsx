@@ -1,5 +1,5 @@
-import employeeApiRequest from '@/http-request/fetch/employees'
-import roleApiRequest from '@/http-request/fetch/roles'
+import employeeApiRequest from '@/http-request/employees'
+import roleApiRequest from '@/http-request/roles'
 import EditForm from './_components/EditForm'
 import RoleUpdate from './_components/RoleUpdate'
 import BreadCrumb from '@/components/common/BreadCrumb'

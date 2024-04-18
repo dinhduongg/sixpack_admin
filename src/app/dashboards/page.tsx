@@ -1,5 +1,5 @@
 import BreadCrumb from '@/components/common/BreadCrumb'
-import dashboardApiRequest from '@/http-request/fetch/dashboards'
+import dashboardApiRequest from '@/http-request/dashboards'
 import TableItem from './_components/TableItem'
 
 interface DashboardsProps {

@@ -1,4 +1,4 @@
-import employeeApiRequest from '@/http-request/fetch/employees'
+import employeeApiRequest from '@/http-request/employees'
 import TableItem from './_components/TableItem'
 import BreadCrumb from '@/components/common/BreadCrumb'
 

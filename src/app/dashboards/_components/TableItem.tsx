@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import DeleteButton from '@/components/common/DeleteButton'
 import { Button } from '@/components/ui/button'
-import dashboardApiRequest from '@/http-request/fetch/dashboards'
+import dashboardApiRequest from '@/http-request/dashboards'
 import { Dashboard } from '@/schema/dashboards'
 
 interface TableItemProps {

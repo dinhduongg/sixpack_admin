@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import AuthProvider from '@/context/AuthProvider'
 import ToastProvider from '@/context/ToastProvider'
 import Sidebar from '@/components/sidebar/Sidebar'
-import dashboardApiRequest from '@/http-request/fetch/dashboards'
+import dashboardApiRequest from '@/http-request/dashboards'
 
 const inter = Inter({ subsets: ['latin'] })
 

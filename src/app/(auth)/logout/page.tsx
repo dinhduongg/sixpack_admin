@@ -1,9 +1,10 @@
 'use client'
 
-import { clientSessionToken } from '@/config/http'
-import authRequestApi from '@/http-request/actions/auth'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
+
+import { clientSessionToken } from '@/config/http'
+import authRequestApi from '@/http-request/auth'
 
 export default function Logout() {
   const router = useRouter()

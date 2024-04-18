@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
-import authRequestApi from '@/http-request/actions/auth'
+import authRequestApi from '@/http-request/auth'
 import handleApiError from '@/lib/handle-api-error'
 import { removeFromStorage } from './useLocalStorage'
 

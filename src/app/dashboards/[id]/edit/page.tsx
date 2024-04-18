@@ -1,6 +1,6 @@
 import BreadCrumb from '@/components/common/BreadCrumb'
-import dashboardApiRequest from '@/http-request/fetch/dashboards'
-import roleApiRequest from '@/http-request/fetch/roles'
+import dashboardApiRequest from '@/http-request/dashboards'
+import roleApiRequest from '@/http-request/roles'
 import EditForm from './_components/EditForm'
 
 type EditDashboardProps = {

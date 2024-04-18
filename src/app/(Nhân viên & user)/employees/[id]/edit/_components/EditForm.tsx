@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import employeeApiRequest from '@/http-request/fetch/employees'
+import employeeApiRequest from '@/http-request/employees'
 import handleApiError from '@/lib/handle-api-error'
 import { Employee, EmployeeUpdateDto, employeeUpdateDto } from '@/schema/employee'
 

@@ -1,4 +1,4 @@
-import getSessionToken from '@/http-request/actions/getSessionToken'
+import getSessionToken from '@/http-request/getSessionToken'
 import envConfig from '@/lib/env-config'
 import { normalizePath } from '@/lib/utils'
 import { redirect } from 'next/navigation'

@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers'
 
-import authRequestApi from '@/http-request/actions/auth'
+import authRequestApi from '@/http-request/auth'
 import { HttpError } from '@/config/http'
 
 export async function POST(request: Request) {

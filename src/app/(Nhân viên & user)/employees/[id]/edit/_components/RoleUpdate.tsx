@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import employeeApiRequest from '@/http-request/fetch/employees'
+import employeeApiRequest from '@/http-request/employees'
 import { Employee } from '@/schema/employee'
 import { Role, RoleEmployeeDto, roleEmployeeDto } from '@/schema/roles'
 

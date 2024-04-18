@@ -9,10 +9,10 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { HttpError } from '@/config/http'
-import authRequestApi from '@/http-request/actions/auth'
 import { LoginSchema, loginSchema } from '@/schema/login'
 import { useAuthContext } from '@/context/AuthProvider'
 import { saveToStorage } from '@/hooks/useLocalStorage'
+import authRequestApi from '@/http-request/auth'
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false)
